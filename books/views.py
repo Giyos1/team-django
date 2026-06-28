@@ -40,3 +40,7 @@ def book_delete(request, pk):
     if request.method == 'POST':
         book.delete()
     return redirect('book_list')
+
+def book_detail(request, pk):
+    book = get_object_or_404(Books, id=pk)
+    return render(request, 'books/detail.html', context={"book": book})
