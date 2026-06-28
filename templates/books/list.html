@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block content %}
+    <a href="{% url 'create_form_book' %}" class="btn btn-primary">Create book</a>
     <table class="table">
         <thead>
         <tr>
@@ -13,6 +14,7 @@
             <th scope="col">Description</th>
             <th scope="col">price</th>
             <th scope="col">created_at</th>
+            <th scope="col">Actions</th>
         </tr>
         </thead>
         {% for book in books %}
@@ -23,6 +25,11 @@
                 <td>{{ book.description }}</td>
                 <td>{{ book.price }}</td>
                 <td>{{ book.create_at }}</td>
+                <td>
+                    <a href="{% url 'update_form_book' book.id %}" class="btn btn-primary">Update</a>
+                    <a href="{% url 'delete_book' book.id %}" class="btn btn-danger">Delete</a>
+                    <a href="{% url 'detail_book' book.id %}" class="btn btn-info">Detail</a>
+                </td>
             </tr>
             </tbody>
 

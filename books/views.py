@@ -26,3 +26,20 @@ def book_create(request):
 def book_update_form(request, pk):
     book = get_object_or_404(Books, id=pk)
     return render(request, 'books/update.html', context={"book": book})
+
+def book_update(request, pk):
+    data = request.PUT
+    Books.objects.filter(id=pk).update(
+        name=data.get('name'),
+        description=data.get('description'),
+        price=data.get('price')
+    )
+    return redirect('book_list')
+
+def book_delete(request, pk):
+    Books.objects.filter(id=pk).delete()
+    return redirect('book_list')
+
+def book_detail(request, pk):
+    data =Books.objects.filter(id=pk).get()
+    return render(request, 'books/detail.html', context={"book": data})
