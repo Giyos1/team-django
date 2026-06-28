@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Kitob qo'shish
+{% endblock %}
+
+{% block content %}
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-md-7 col-lg-6">
+                <div class="card shadow-sm border-0">
+                    <div class="card-body p-4 p-md-5">
+                        <h3 class="card-title text-center mb-4">📚 Yangi kitob qo'shish</h3>
+
+                        <form action="{% url 'create_book' %}" method="post">
+                            {% csrf_token %}
+
+                            <div class="mb-3">
+                                <label for="name" class="form-label fw-semibold">Nomi</label>
+                                <input type="text" class="form-control form-control-lg" id="name" name="name"
+                                       placeholder="Kitob nomini kiriting" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="description" class="form-label fw-semibold">Tavsifi</label>
+                                <textarea class="form-control" id="description" name="description" rows="4"
+                                          placeholder="Kitob haqida qisqacha ma'lumot" required></textarea>
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="price" class="form-label fw-semibold">Narxi</label>
+                                <div class="input-group input-group-lg">
+                                    <input type="number" class="form-control" id="price" name="price" min="0"
+                                           placeholder="0" required>
+                                    <span class="input-group-text">so'm</span>
+                                </div>
+                            </div>
+
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn btn-primary btn-lg">Saqlash</button>
+                                <a href="/books/" class="btn btn-outline-secondary">Bekor qilish</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

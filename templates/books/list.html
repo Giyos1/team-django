@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    list
+{% endblock %}
+
+{% block content %}
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">price</th>
+            <th scope="col">created_at</th>
+        </tr>
+        </thead>
+        {% for book in books %}
+            <tbody>
+            <tr>
+                <th scope="row">{{ book.id }}</th>
+                <td>{{ book.name }}</td>
+                <td>{{ book.description }}</td>
+                <td>{{ book.price }}</td>
+                <td>{{ book.create_at }}</td>
+            </tr>
+            </tbody>
+
+        {% endfor %}
+    </table>
+
+{% endblock %}
