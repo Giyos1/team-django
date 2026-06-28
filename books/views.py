@@ -26,3 +26,17 @@ def book_create(request):
 def book_update_form(request, pk):
     book = get_object_or_404(Books, id=pk)
     return render(request, 'books/update.html', context={"book": book})
+
+def book_update(request, pk):
+    book = get_object_or_404(Books, id=pk)
+    book.name = request.POST.get('name')
+    book.description = request.POST.get('description')
+    book.price = request.POST.get('price')
+    book.save()
+    return redirect('book_list')
+
+def book_delete(request, pk):
+    book = get_object_or_404(Books, id=pk)
+    if request.method == 'POST':
+        book.delete()
+    return redirect('book_list')

@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block content %}
+    <a href="{% url 'create_form_book' %}" class="btn btn-outline-secondary mb-3">Add Book</a>
     <table class="table">
         <thead>
         <tr>
@@ -13,6 +14,7 @@
             <th scope="col">Description</th>
             <th scope="col">price</th>
             <th scope="col">created_at</th>
+            <th scope="col">Action</th>
         </tr>
         </thead>
         {% for book in books %}
@@ -22,7 +24,19 @@
                 <td>{{ book.name }}</td>
                 <td>{{ book.description }}</td>
                 <td>{{ book.price }}</td>
-                <td>{{ book.create_at }}</td>
+                <td>{{ book.create_at|date:"Y-m-d" }}</td>
+                <td>
+                    <a href="{% url 'update_book_form' book.id %}" class="btn btn-warning btn-sm"> Update </a>
+                    <form action="{% url 'delete_book' book.id %}"
+                          method="post"
+                          style="display:inline;"
+                          onsubmit="return confirm('Rostdan ham ushbu kitobni o‘chirmoqchimisiz?');">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger btn-sm">
+                            Delete
+                        </button>
+                    </form>
+                </td>
             </tr>
             </tbody>
 
