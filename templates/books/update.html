@@ -14,28 +14,29 @@
 
                         <form action="{% url 'update_book' book.id %}" method="post">
                             {% csrf_token %}
+                            {{ form.as_p }}
 
-                            <div class="mb-3">
-                                <label for="name" class="form-label fw-semibold">Nomi</label>
-                                <input type="text" class="form-control form-control-lg" id="name" name="name"
-                                       placeholder="Kitob nomini kiriting" required value="{{ book.name }}">
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="description" class="form-label fw-semibold">Tavsifi</label>
-                                <textarea class="form-control" id="description" name="description" rows="4"
-                                          placeholder="Kitob haqida qisqacha ma'lumot"
-                                          required>{{ book.description }}</textarea>
-                            </div>
-
-                            <div class="mb-4">
-                                <label for="price" class="form-label fw-semibold">Narxi</label>
-                                <div class="input-group input-group-lg">
-                                    <input type="number" class="form-control" id="price" name="price" min="0"
-                                           placeholder="0" required value="{{ book.price }}">
-                                    <span class="input-group-text">so'm</span>
-                                </div>
-                            </div>
+{#                            <div class="mb-3">#}
+{#                                <label for="name" class="form-label fw-semibold">Nomi</label>#}
+{#                                <input type="text" class="form-control form-control-lg" id="name" name="name"#}
+{#                                       placeholder="Kitob nomini kiriting" required value="{{ book.name }}">#}
+{#                            </div>#}
+{##}
+{#                            <div class="mb-3">#}
+{#                                <label for="description" class="form-label fw-semibold">Tavsifi</label>#}
+{#                                <textarea class="form-control" id="description" name="description" rows="4"#}
+{#                                          placeholder="Kitob haqida qisqacha ma'lumot"#}
+{#                                          required>{{ book.description }}</textarea>#}
+{#                            </div>#}
+{##}
+{#                            <div class="mb-4">#}
+{#                                <label for="price" class="form-label fw-semibold">Narxi</label>#}
+{#                                <div class="input-group input-group-lg">#}
+{#                                    <input type="number" class="form-control" id="price" name="price" min="0"#}
+{#                                           placeholder="0" required value="{{ book.price }}">#}
+{#                                    <span class="input-group-text">so'm</span>#}
+{#                                </div>#}
+{#                            </div>#}
 
                             <div class="d-grid gap-2">
                                 <button type="submit" class="btn btn-primary btn-lg">Update</button>
