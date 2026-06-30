@@ -86,8 +86,8 @@ DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
         "NAME": "team_django",
-        "USER": "giyos",
-        "PASSWORD": "12",
+        "USER": "postgres",
+        "PASSWORD": "12345",
         "HOST": "127.0.0.1",
         "PORT": "5432",
     }
@@ -129,6 +129,9 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 
 SHELL_PLUS_PRINT_SQL = True
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 # CRUD
 # AUTHOR C->R->U->D

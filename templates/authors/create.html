@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Create Author
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+    <div class="card shadow">
+        <div class="card-header">
+            <h3>Create Author</h3>
+        </div>
+
+        <div class="card-body">
+
+            <form method="post" action="{% url 'create_author' %}" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <div class="mb-3">
+                    <label class="form-label">Name</label>
+                    {{ form.name }}
+                    {{ form.name.errors }}
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Birth Date</label>
+                    {{ form.birth_date }}
+                    {{ form.birth_date.errors }}
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Biography</label>
+                    {{ form.biography }}
+                    {{ form.biography.errors }}
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Email</label>
+                    {{ form.email }}
+                    {{ form.email.errors }}
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Phone</label>
+                    {{ form.phone }}
+                    {{ form.phone.errors }}
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Photo</label>
+                    {{ form.photo }}
+                    {{ form.photo.errors }}
+                </div>
+
+                <button type="submit" class="btn btn-success">
+                    Save
+                </button>
+
+                <a href="{% url 'authors_list' %}" class="btn btn-secondary">
+                    Cancel
+                </a>
+
+            </form>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

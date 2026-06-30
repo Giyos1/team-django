@@ -12,8 +12,9 @@
             <th scope="col">#</th>
             <th scope="col">Name</th>
             <th scope="col">Description</th>
-            <th scope="col">price</th>
-            <th scope="col">created_at</th>
+            <th scope="col">Price</th>
+            <th scope="col">Author</th>
+            <th scope="col">Created At</th>
             <th scope="col">Action</th>
         </tr>
         </thead>
@@ -24,6 +25,13 @@
                 <td>{{ book.name }}</td>
                 <td>{{ book.description }}</td>
                 <td>{{ book.price }}</td>
+                <td>
+                    {% if book.author %}
+                        {{ book.author.name }}
+                    {% else %}
+                        <span class="text-muted">No author</span>
+                    {% endif %}
+                </td>
                 <td>{{ book.create_at|date:"Y-m-d" }}</td>
                 <td>
                     <a href="{% url 'detail_book' book.id %}" class="btn btn-info btn-sm">Detail</a>
