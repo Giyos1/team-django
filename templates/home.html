@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Home
+{% endblock %}
+
+{% block content %}
+
+<div class="p-5 mb-4 bg-dark text-white rounded-4">
+
+    <h1>Kutubxona boshqaruv tizimi</h1>
+
+    <p class="lead">
+        Kitoblar va mualliflarni yagona platforma orqali boshqaring.
+    </p>
+
+    <a href="{% url 'book_list' %}" class="btn btn-primary">
+        Kitoblar
+    </a>
+
+    <a href="{% url 'authors_list' %}" class="btn btn-outline-light">
+        Mualliflar
+    </a>
+
+</div>
+
+<div class="row text-center mb-5">
+
+    <div class="col-md-4">
+        <div class="card shadow">
+            <div class="card-body">
+                <h1>{{ books_count }}</h1>
+                <p>Jami kitoblar</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card shadow">
+            <div class="card-body">
+                <h1>{{ authors_count }}</h1>
+                <p>Jami mualliflar</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card shadow">
+            <div class="card-body">
+                <h1>{{ average_price|floatformat:0 }}</h1>
+                <p>O'rtacha narx</p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="row">
+
+    <div class="col-md-6">
+
+        <div class="card shadow">
+
+            <div class="card-header">
+                Oxirgi qo'shilgan kitoblar
+            </div>
+
+            <ul class="list-group list-group-flush">
+
+                {% for book in latest_books %}
+                    <li class="list-group-item d-flex justify-content-between">
+
+                        <span>{{ book.name }}</span>
+
+                        <small class="text-muted">
+                            {{ book.author|default:"No author" }}
+                        </small>
+
+                    </li>
+                {% endfor %}
+
+            </ul>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-6">
+
+        <div class="card shadow">
+
+            <div class="card-header">
+                Oxirgi qo'shilgan mualliflar
+            </div>
+
+            <ul class="list-group list-group-flush">
+
+                {% for author in latest_authors %}
+
+                    <li class="list-group-item">
+                        {{ author.name }}
+                    </li>
+
+                {% endfor %}
+
+            </ul>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

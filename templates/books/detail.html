@@ -7,44 +7,88 @@
 {% block content %}
 
 <div class="container mt-5">
+
     <div class="row justify-content-center">
 
-        <div class="col-md-8">
+        <div class="col-lg-8">
 
-            <div class="card shadow-lg border-0 rounded-4">
+            <div class="card shadow border-0 rounded-4">
 
                 <div class="card-header bg-dark text-white text-center py-4">
-                    <h2>{{ book.name }}</h2>
+                    <h2 class="mb-0">{{ book.name }}</h2>
                 </div>
 
-                <div class="card-body">
+                <div class="card-body p-4">
 
-                    <div class="mb-4">
-                        <h5 class="text-secondary">Description</h5>
-                        <p class="fs-5">{{ book.description }}</p>
-                    </div>
+                    <h5 class="text-secondary mb-3">
+                        Description
+                    </h5>
 
-                    <hr>
+                    <p class="fs-5">
+                        {{ book.description }}
+                    </p>
 
-                    <div class="row">
+                    <hr class="my-4">
 
-                        <div class="col-md-6">
-                            <h6 class="text-muted">Price</h6>
-                            <h4 class="text-success">{{ book.price }} so'm</h4>
+                    <div class="row g-3">
+
+                        <div class="col-md-4">
+                            <div class="border rounded-3 p-3 text-center h-100">
+
+                                <small class="text-muted d-block">
+                                    Price
+                                </small>
+
+                                <h4 class="text-success mt-2">
+                                    {{ book.price }} so'm
+                                </h4>
+
+                            </div>
                         </div>
 
-                        <div class="col-md-6">
-                            <h6 class="text-muted">Created Date</h6>
-                            <h5>{{ book.create_at|date:"d.m.Y" }}</h5>
+                        <div class="col-md-4">
+                            <div class="border rounded-3 p-3 text-center h-100">
+
+                                <small class="text-muted d-block">
+                                    Author
+                                </small>
+
+                                {% if book.author %}
+                                    <a href="{% url 'detail_author' book.author.id %}"
+                                       class="fw-bold fs-5 text-decoration-none">
+                                        {{ book.author.name }}
+                                    </a>
+                                {% else %}
+                                    <span class="text-muted">
+                                        No author
+                                    </span>
+                                {% endif %}
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="border rounded-3 p-3 text-center h-100">
+
+                                <small class="text-muted d-block">
+                                    Created Date
+                                </small>
+
+                                <h5 class="mt-2">
+                                    {{ book.create_at|date:"d.m.Y" }}
+                                </h5>
+
+                            </div>
                         </div>
 
                     </div>
 
                 </div>
 
-                <div class="card-footer d-flex justify-content-between">
+                <div class="card-footer bg-white d-flex justify-content-between align-items-center p-3">
 
-                    <a href="{% url 'book_list' %}" class="btn btn-secondary">
+                    <a href="{% url 'book_list' %}"
+                       class="btn btn-secondary">
                         ← Back
                     </a>
 
@@ -62,7 +106,8 @@
 
                             {% csrf_token %}
 
-                            <button type="submit" class="btn btn-danger">
+                            <button type="submit"
+                                    class="btn btn-danger">
                                 Delete
                             </button>
 
@@ -77,6 +122,7 @@
         </div>
 
     </div>
+
 </div>
 
 {% endblock %}

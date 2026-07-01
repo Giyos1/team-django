@@ -36,11 +36,25 @@ class BookModelForm(forms.ModelForm):
     class Meta:
         model = Books
         fields = ('name', 'description', 'price', 'author')
-        widgets = {"description": forms.TextInput(attrs={
-            'class': 'form-control',
-            'placeholder': 'text kirit',
-            'autofocus': True
-        })}
+        widgets = {
+            "name": forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Book name',
+                'autofocus': True
+            }),
+            "description": forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Book description',
+                'autofocus': True
+            }),
+            "price": forms.NumberInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Book price',
+            }),
+            "author": forms.Select(attrs={
+                'class': 'form-control',
+            }),
+        }
 
     def clean_name(self):
         name = self.cleaned_data.get('name')

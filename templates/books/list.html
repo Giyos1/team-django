@@ -27,7 +27,10 @@
                 <td>{{ book.price }}</td>
                 <td>
                     {% if book.author %}
-                        {{ book.author.name }}
+                        <a href="{% url 'detail_author' book.author.id %}"
+                           class="text-decoration-none">
+                            {{ book.author.name }}
+                        </a>
                     {% else %}
                         <span class="text-muted">No author</span>
                     {% endif %}
