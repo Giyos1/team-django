@@ -4,6 +4,8 @@ from django.db import models
 class Authors(models.Model):
     name = models.CharField(max_length=255)
     birth_date = models.DateField()
+    birth_place = models.CharField(max_length=255, null=True, blank=True)
+    biography = models.TextField(null=True, blank=True)
 
     def __str__(self):
         return self.name

@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Author Detail
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+
+        <div class="col-md-8">
+
+            <div class="card shadow-lg border-0 rounded-4">
+
+                <div class="card-header bg-dark text-white text-center py-4">
+                    <h2>{{ author.name }}</h2>
+                </div>
+
+                <div class="card-body">
+
+                    <div class="mb-4">
+                        <h5 class="text-secondary">Biography</h5>
+                        <p class="fs-5">{{ author.biography }}</p>
+                    </div>
+
+                    <hr>
+
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <h6 class="text-muted">Birth date</h6>
+                            <h4>{{ author.birth_date }}</h4>
+                        </div>
+
+                        <div class="col-md-6">
+                            <h6 class="text-muted">Birth place</h6>
+                            <h5>{{ author.birth_place }}</h5>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="card-footer d-flex justify-content-between">
+
+                    <a href="{% url 'author_list' %}" class="btn btn-secondary">
+                        ← Back
+                    </a>
+
+                    <div>
+
+                        <a href="{% url 'update_author_form' author.id %}"
+                           class="btn btn-warning">
+                            Update
+                        </a>
+
+                        <form action="{% url 'delete_author' author.id %}"
+                              method="post"
+                              style="display:inline;"
+                              onsubmit="return confirm('Rostdan ham ushbu authorni o‘chirmoqchimisiz?');">
+
+                            {% csrf_token %}
+
+                            <button type="submit" class="btn btn-danger">
+                                Delete
+                            </button>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

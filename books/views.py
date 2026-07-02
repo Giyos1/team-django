@@ -1,7 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
 
-from books.forms import BookForm, BookModelForm
-from books.models import Books
+from books.forms import BookModelForm, AuthorsModelForm
+from books.models import Books, Authors
+
+
+def home(request):
+    return render(request, 'home.html')
 
 
 def book_list(request):
@@ -67,3 +71,53 @@ def book_delete(request, pk):
 def book_detail(request, pk):
     book = get_object_or_404(Books, id=pk)
     return render(request, 'books/detail.html', context={"book": book})
+
+
+
+
+def authors_list(request):
+    authors = Authors.objects.all()
+
+    return render(request, 'authors/list.html', context={"authors": authors})
+
+def author_create_form(request):
+    form = AuthorsModelForm()
+    return render(request, 'authors/create.html', {"form": form})
+
+
+def author_create(request):
+    form = AuthorsModelForm(data=request.POST)
+    if form.is_valid():
+        form.save()
+        return redirect('author_list')
+    else:
+        return render(request, 'authors/create.html', {'form': form})
+
+
+def author_detail(request, pk):
+    author = get_object_or_404(Authors, id=pk)
+    return render(request, 'authors/detail.html', context={"author": author})
+
+
+def author_update_form(request, pk):
+    author = get_object_or_404(Authors, id=pk)
+    form = AuthorsModelForm(instance=author)
+    return render(request, 'authors/update.html', context={"author": author, 'form': form})
+
+
+def author_update(request, pk):
+    author = get_object_or_404(Authors, id=pk)
+    form = AuthorsModelForm(data=request.POST, instance=author)
+    if form.is_valid():
+        form.save()
+        return redirect('author_list')
+    else:
+        return render(request, 'authors/update.html', {'author': author, 'form': form})
+
+
+def author_delete(request, pk):
+    author = get_object_or_404(Authors, id=pk)
+    if request.method == 'POST':
+        author.delete()
+    return redirect('author_list')
+

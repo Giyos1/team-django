@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    list author
+{% endblock %}
+
+{% block content %}
+    <a href="{% url 'create_form_author' %}" class="btn btn-outline-secondary mb-3">Add author</a>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">birth date</th>
+            <th scope="col">birth place</th>
+            <th scope="col">bio</th>
+            <th scope="col">Action</th>
+        </tr>
+        </thead>
+        {% for author in authors %}
+            <tbody>
+            <tr>
+                <th scope="row">{{ author.id }}</th>
+                <td>{{ author.name }}</td>
+                <td>{{ author.birth_date }}</td>
+                <td>{{ author.birth_place }}</td>
+                <td>{{ author.biography }}</td>
+                <td>
+                    <a href="{% url 'detail_author' author.id %}" class="btn btn-info btn-sm">Detail</a>
+                    <a href="{% url 'update_author_form' author.id %}" class="btn btn-warning btn-sm"> Update </a>
+                    <form action="{% url 'delete_author' author.id %}"
+                          method="post"
+                          style="display:inline;"
+                          onsubmit="return confirm('Rostdan ham ushbu kitobni o‘chirmoqchimisiz?');">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger btn-sm">
+                            Delete
+                        </button>
+                    </form>
+                </td>
+                <td></td>
+            </tr>
+            </tbody>
+
+        {% endfor %}
+    </table>
+
+{% endblock %}

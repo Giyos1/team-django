@@ -1,6 +1,6 @@
 from django import forms
 
-from books.models import Books
+from books.models import Books, Authors
 
 
 class BookForm(forms.Form):
@@ -57,3 +57,15 @@ class BookModelForm(forms.ModelForm):
             raise forms.ValidationError('ikkalasi bir xil bollmasin')
 
         return self.cleaned_data
+
+class AuthorsModelForm(forms.ModelForm):
+    class Meta:
+        model = Authors
+        fields = ('name', 'birth_date', 'birth_place', 'biography')
+
+def clean_birth_date(self):
+    return self.cleaned_data.get('birth_date').strftime('%Y-%m-%d')
+
+def clean_biography(self):
+    if len(biography) < 50:
+        raise forms.ValidationError('50 ta harfdan kam bo\'lsin')
